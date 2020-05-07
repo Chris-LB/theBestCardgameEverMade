@@ -1,4 +1,3 @@
-
 /*
  * author : alex Torres
  * this class is the card class that will hold the suit, value and image of the card.
