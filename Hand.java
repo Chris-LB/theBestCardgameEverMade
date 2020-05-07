@@ -24,9 +24,13 @@ public class Hand {
 	
 	//method that will remove card from a selected index and returns the card removed
 	public Card removeCard(int index) {
-		Card cardRevmoved = hand.remove(index);
-		return cardRevmoved;
-				
+		Card tempCard = hand.remove(index);
+		return tempCard;		
+	}
+	
+	//method that returns the size of the hand
+	public int getSize() {
+		return hand.size();
 	}
 	
 	//method that will return a card besed on the index passed
@@ -53,6 +57,8 @@ public class Hand {
 			return false;
 		}
 	}
+	
+	
 	
 	//toString 
 	@Override
