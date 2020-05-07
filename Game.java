@@ -5,10 +5,21 @@
  */
 public class Game {
 	
-	public static void startGame() {
+	Deck deck;
+	
+	Hand playerHand;
+	Hand computerHand;
+	
+	Player p1;
+	ComputerPlayer c1;
+	
+	int playerChoosenIndex;
+	
+	//this method will set up a game
+	public void gameSetup() {
 		
 		//create deck
-		Deck deck = CreateDeck.fullDeck();
+		deck = CreateDeck.fullDeck();
 		
 		//shuffle deck
 		deck.shuffleDeck();
@@ -16,29 +27,38 @@ public class Game {
 		//create hands
 		
 		//hand for player. half the deck is delt
-		Hand playerHand = new Hand( deck.dealFirstHalf());
+		 playerHand = new Hand( deck.dealFirstHalf());
 		
 		//hand for computer player. second half is delt
-		Hand computerHand = new Hand( deck.dealSecondhalf());
+		 computerHand = new Hand( deck.dealSecondhalf());
 		
 		//add hand to players
 		
 		//player
-		Player p1 = new Player( playerHand);
+		 p1 = new Player( playerHand);
 		
 		//computer
-		ComputerPlayer c1 = new ComputerPlayer( computerHand);
-		
-		
-		
-		
-		//boolean that is false until one player runs out of cards
-		boolean noWinner = true;
-		
-		//loop that will keep the game going
-		while (noWinner) {
+		 c1 = new ComputerPlayer( computerHand);
 			
-		}
+			
 	}
+	
+	//this method is the player turn. this method will remove a card from the computer hand based on an index
+	public void playerTurn() {
+		//removing card from index given from combo box action listener
+		
+		Card tempCard = c1.hand.getCard(playerChoosenIndex);
+		c1.removeCard(playerChoosenIndex);
+		
+		//put card into player deck
+		p1.hand.addCard(tempCard);
+		
+		//check for pairs
+		p1.removePairs();
+		
+	}
+	
+	
+	
 
 }
