@@ -5,15 +5,29 @@
  */
 public class Game {
 	
-	Deck deck;
+	//deck of cards
+	private Deck deck;
 	
-	Hand playerHand;
-	Hand computerHand;
+	//hands for players
+	private Hand playerHand;
+	private Hand computerHand;
 	
-	Player p1;
-	ComputerPlayer c1;
+	//player and computer
+	private Player p1;
+	 ComputerPlayer c1;
 	
-	int playerChoosenIndex;
+	//stores index of combo box from gui
+	private int playerChoosenIndex;
+	
+	//getter and setter for playerChoosenIndex
+	public int getPlayerChoosenIndex() {
+		return playerChoosenIndex;
+	}
+
+	public void setPlayerChoosenIndex(int playerChoosenIndex) {
+		this.playerChoosenIndex = playerChoosenIndex;
+	}
+	
 	
 	//this method will set up a game
 	public void gameSetup() {
@@ -25,7 +39,6 @@ public class Game {
 		deck.shuffleDeck();
 		
 		//create hands
-		
 		//hand for player. half the deck is delt
 		 playerHand = new Hand( deck.dealFirstHalf());
 		
@@ -43,22 +56,66 @@ public class Game {
 			
 	}
 	
+
 	//this method is the player turn. this method will remove a card from the computer hand based on an index
 	public void playerTurn() {
 		//removing card from index given from combo box action listener
 		
-		Card tempCard = c1.hand.getCard(playerChoosenIndex);
-		c1.removeCard(playerChoosenIndex);
+		Card tempCard = c1.removeCard(playerChoosenIndex);
 		
 		//put card into player deck
-		p1.hand.addCard(tempCard);
+		p1.getHand().addCard(tempCard);
 		
 		//check for pairs
 		p1.removePairs();
 		
+		//toString for test run
+		System.out.println( p1.toString() );
+		
 	}
 	
+	//this method is the computer turn and will simulate the computer playing
+	public void computerTurn() {
+		//random generated int 
+		int generatedInt = c1.GenerateRandomInt();
+		
+		//remove card from player deck
+		Card tempCard = p1.removeCard(generatedInt);
+		
+		//add card to computer hand
+		c1.addCard(tempCard);
+		
+		//check for pairs
+		
+		c1.removePairs();
+		
+	}
 	
+	//this method checks if the game is over
+	public boolean isGameDone () {
+		if (p1.getHand().isHandEmpty()) {
+			System.out.println("congradulations, you won");
+			return true;
+		} 
+		
+		if (c1.getHand().isHandEmpty()) {
+			System.out.println("You lost");
+			return true;
+		}
+		
+		return false;
+	}
+	
+	//method that will check for pairs at the beginning of the game
+	public void checkingForPairs () {
+		p1.removePairs();
+		c1.removePairs();
+	}
+	
+	//method that returns the size of the hand in c1
+	public int getC1Size() {
+		return c1.getHandSize();
+	}
 	
 
 }
