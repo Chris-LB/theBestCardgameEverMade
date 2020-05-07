@@ -1,4 +1,3 @@
-
 /*
  * Author: alex torres 
  * this class will store a deck of cards. this class has an array list that will store a deck of cards.
@@ -53,6 +52,11 @@ public class Deck {
 			tempHand.add(tempCard);
 		}
 		return tempHand;
+	}
+	
+	@Override
+	public String toString () {
+		return deck.toString();
 	}
 	
 	
